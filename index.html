@@ -85,9 +85,29 @@
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
+	#mobileWarning {
+	    position: fixed;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    height: 100%;
+	    background-color: #f8d7da;
+	    color: #721c24;
+	    padding: 20px;
+	    box-sizing: border-box;
+	    z-index: 9999;
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+	    text-align: center;
+	    font-size: 18px;
+	}
     </style>
 </head>
 <body>
+    <div id="mobileWarning" style="display: none;">
+        <p>Per una migliore esperienza, si consiglia di aprire questa applicazione su un dispositivo desktop.</p>
+    </div>
     <div class="container">
         <h1>Cicci's Brake Calculator</h1>
         
@@ -555,6 +575,16 @@
     <p>This simulator is an educational exercise and does not replace professional advice. Modifying a motorcycle's brake system can compromise safety if not done correctly. Always consult a qualified mechanic before making changes to the brake system.</p>
 </div>
 
+<script>
+    function checkMobile() {
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            document.getElementById('mobileWarning').style.display = 'block';
+            document.querySelector('.container').style.display = 'none';
+        }
+    }
 
+    window.onload = checkMobile;
+</script>	
+	
 </body>
 </html>
