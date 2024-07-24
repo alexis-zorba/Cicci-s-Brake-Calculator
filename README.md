@@ -3,6 +3,8 @@ Warnings: This simulator is an educational exercise and does not replace profess
 
 The primary objective of Cicci's Brake Calculator is to provide motorcycle enthusiasts, mechanics, and engineers with a detailed and intuitive tool to compare and analyze various brake system configurations. This simulator is named in honor of Cicci, a legendary Honda mechanic from Genoa, known for his expertise and contributions to the motorcycle community.
 
+you can use the simulator here: https://ciccisbrakecalculator.netlify.app/
+
 Glossary
 MC: Master Cylinder
 Bore: Internal diameter of the cylinder
