@@ -1,4 +1,7 @@
 Warnings: This simulator is an educational exercise and does not replace professional advice. Modifying a motorcycle's brake system can compromise safety if not done correctly. Always consult a qualified mechanic before making changes to the brake system.
+-------------
+
+The primary objective of Cicci's Brake Calculator is to provide motorcycle enthusiasts, mechanics, and engineers with a detailed and intuitive tool to compare and analyze various brake system configurations. This simulator is named in honor of Cicci, a legendary Honda mechanic from Genoa, known for his expertise and contributions to the motorcycle community.
 
 Glossary
 MC: Master Cylinder
