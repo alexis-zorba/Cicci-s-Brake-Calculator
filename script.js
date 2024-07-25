@@ -11,9 +11,9 @@ function createConfigurationRows() {
             <td>${config.type}</td>
             <td><input type="number" class="pivotToPiston" value="${config.pivotToPiston}" step="0.1"></td>
             <td><input type="number" class="pivotToHand" value="${config.pivotToHand}" step="0.1"></td>
-            <td><input type="number" class="pistonDiameter" value="27" step="0.1"></td>
-            <td><input type="number" class="pistonsPerCaliper" value="2"></td>
-            <td><input type="number" class="numberOfCalipers" value="1"></td>
+            <td><input type="number" class="pistonDiameter" value="32" step="0.1"></td>
+            <td><input type="number" class="pistonsPerCaliper" value="4"></td>
+            <td><input type="number" class="numberOfCalipers" value="2"></td>
         `;
     });
 }
@@ -160,11 +160,11 @@ function calculateResults() {
         const validRank = validConfigs.findIndex(config => config.index === configIndex);
 
         if (zScores[configIndex] !== "OUT") {
-            if (validRank === 0) {
+            if (validRank >= 0 && validRank <= 2) {
                 row.style.backgroundColor = '#00ff00'; // Green for best
-            } else if (validRank === 1 || validRank === 2) {
+            } else if (validRank >= 3 && validRank <= 7) {
                 row.style.backgroundColor = '#32cd32'; // Lime green for second and third
-            } else if (validRank >= 3 && validRank <= 5) {
+            } else if (validRank >= 8 && validRank <= 12) {
                 row.style.backgroundColor = '#ffff00'; // Yellow for fourth, fifth, and sixth
             }
         }

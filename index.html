@@ -29,23 +29,23 @@
             </tr>
             <tr>
                 <td>Original Pump Bore (mm):</td>
-                <td><input type="number" id="originalBore" value="12.7" step="0.1"></td>
+                <td><input type="number" id="originalBore" value="16" step="0.1"></td>
                 <td>Original Number of Calipers:</td>
-                <td><input type="number" id="originalNumberOfCalipers" value="1"></td>
+                <td><input type="number" id="originalNumberOfCalipers" value="2"></td>
                 <td></td>
             </tr>
             <tr>
                 <td>Original Pivot-to-Piston Distance (mm):</td>
-                <td><input type="number" id="originalPivotToPiston" value="27" step="0.1"></td>
+                <td><input type="number" id="originalPivotToPiston" value="18" step="0.1"></td>
                 <td>Original Pistons per Caliper:</td>
-                <td><input type="number" id="originalPistonsPerCaliper" value="2"></td>
+                <td><input type="number" id="originalPistonsPerCaliper" value="4"></td>
                 <td></td>
             </tr>
             <tr>
                 <td>Original Pivot-to-Hand Distance (mm):</td>
                 <td><input type="number" id="originalPivotToHand" value="90" step="0.1"></td>
-                <td>Original Caliper Piston Diameter (mm):</td>
-                <td><input type="number" id="originalPistonDiameter" value="27" step="0.1"></td>
+                <td>Original Caliper Piston Diameter (average mm):</td>
+                <td><input type="number" id="originalPistonDiameter" value="32" step="0.1"></td>
                 <td></td>
             </tr>
             <tr>
@@ -206,7 +206,7 @@
 			<li><strong>Total Caliper Piston Area:</strong> Piston Area * Number of Pistons * Number of Calipers</li>
 			<li><strong>MC-to-Caliper Ratio:</strong> Total Caliper Piston Area / Master Cylinder Area</li>
 			<li><strong>Interaxis Ratio (only for radial pumps):</strong> Pivot-to-Hand / Pivot-to-Piston</li>
-			<li><strong>Overall Leverage Ratio:</strong>For radial pumps: MC-to-Caliper Ratio * Interaxis Ratio</li>
+			<li><strong>Overall Leverage Ratio:</strong>MC-to-Caliper Ratio * Interaxis Ratio</li>
 			<li><strong>Power Difference (%):</strong> ((New MC-to-Caliper Ratio - Original MC-to-Caliper Ratio) / Original MC-to-Caliper Ratio) * 100</li>
 			<li><strong>Lever Travel Difference (%):</strong> ((New Overall Leverage Ratio - Original Overall Leverage Ratio) / Original Overall Leverage Ratio) * 100</li>
 		</ol>

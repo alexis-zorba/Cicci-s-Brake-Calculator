@@ -33,7 +33,8 @@ function calculateZScore(mcToCaliperRatio, overallLeverageRatio, minModularity, 
     const modularity = 1 / mcToCaliperRatio;
     const normalizedModularity = (modularity - minModularity) / (maxModularity - minModularity);
     const normalizedPower = (overallLeverageRatio - minPower) / (maxPower - minPower);
-    return (normalizedModularity * (1 - powerWeight) + normalizedPower * powerWeight);
+	return (normalizedModularity * (1 - Math.pow(powerWeight, 2)) + normalizedPower * Math.pow(powerWeight, 2));
+
 }
 
 function validateInputs(...inputs) {
