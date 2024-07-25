@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cicci's Brake Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+</head>
+<body>
+    <div id="mobileWarning" style="display: none;">
+        <p>- Cicci's Brake Calculator -</p>
+        <p>Per usare l'app devi aprire questa applicazione su un dispositivo desktop.</p>
+        <p>To use the app, you must open this application on a desktop device.</p>
+    </div>
+    <div class="container">
+        <h1>Cicci's Brake Calculator</h1>
+        
+        <div class="technical-info">
+            <p>Calculator created by AC in honor of Cicci, legendary Honda mechanic from Genoa.</p>
+        </div>
+        
+        <h2>Original Setup</h2>
+        <table id="originalSetup">
+            <tr>
+                <th colspan="2">Pump</th>
+                <th colspan="3">Caliper</th>
+            </tr>
+            <tr>
+                <td>Original Pump Bore (mm):</td>
+                <td><input type="number" id="originalBore" value="12.7" step="0.1"></td>
+                <td>Original Number of Calipers:</td>
+                <td><input type="number" id="originalNumberOfCalipers" value="1"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Original Pivot-to-Piston Distance (mm):</td>
+                <td><input type="number" id="originalPivotToPiston" value="27" step="0.1"></td>
+                <td>Original Pistons per Caliper:</td>
+                <td><input type="number" id="originalPistonsPerCaliper" value="2"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Original Pivot-to-Hand Distance (mm):</td>
+                <td><input type="number" id="originalPivotToHand" value="90" step="0.1"></td>
+                <td>Original Caliper Piston Diameter (mm):</td>
+                <td><input type="number" id="originalPistonDiameter" value="27" step="0.1"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Original Pump Type:</td>
+                <td>
+                    <select id="originalPumpType">
+                        <option value="axial">Axial</option>
+                        <option value="radial">Radial</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+
+        <div class="slider-container">
+            <label for="powerWeight">Power vs Modularity Balance:</label>
+            <div class="slider-wrapper">
+                <span class="slider-label">More Modularity</span>
+                <input type="range" id="powerWeight" min="0" max="100" value="50">
+                <span class="slider-label">More Power</span>
+            </div>
+            <span id="powerWeightValue">50% (Balanced)</span>
+        </div>
+
+        <div class="slider-container">
+            <label for="maxLeverTravel">Max Lever Travel Increase (%):</label>
+            <input type="number" id="maxLeverTravel" value="25" min="0" max="100" step="1">
+        </div>
+
+        <h2>Configurations to Compare</h2>
+        <table id="configurations">
+            <thead>
+                <tr>
+                    <th>Configuration</th>
+                    <th>MC Bore (mm)</th>
+                    <th>MC Type</th>
+                    <th>Pivot-to-Piston (mm)</th>
+                    <th>Pivot-to-Hand (mm)</th>
+                    <th>Piston Diameter (mm)</th>
+                    <th>Pistons per Caliper</th>
+                    <th>Number of Calipers</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows will be added here by JavaScript -->
+            </tbody>
+        </table>
+        
+        <button id="calculate">Calculate</button>
+
+        <div id="results">
+            <h2>Results</h2>
+            <table id="resultsTable">
+                <thead>
+                    <tr>
+                        <th>Configuration</th>
+                        <th>MC Bore (mm)</th>
+                        <th>MC-to-Caliper Ratio</th>
+                        <th>Overall Leverage Ratio</th>
+                        <th>Power Difference (%)</th>
+                        <th>Lever Travel Difference (%)</th>
+                        <th>Z-Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Results will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="charts">
+            <div class="chart-container">
+                <canvas id="powerChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="leverTravelChart"></canvas>
+            </div>
+            <div class="chart-container full-width">
+                <canvas id="scatterChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="calculations.js"></script>
+    <script src="charts.js"></script>
+    <script src="script.js"></script>
+	
+<div class="technical-info">
+	<h3>Glossario</h3>
+    <ul>
+        <li><strong>MC:</strong> Master Cylinder (Cilindro Maestro)</li>
+        <li><strong>Bore:</strong> Diametro interno del cilindro</li>
+        <li><strong>Pivot-to-Piston:</strong> Distanza dal perno della leva al punto di contatto con il pistone del cilindro maestro</li>
+        <li><strong>Pivot-to-Hand:</strong> Distanza dal perno della leva al punto di applicazione della forza della mano</li>
+        <li><strong>Radial:</strong> Pompa freno con cilindro parallelo alla leva</li>
+        <li><strong>Axial:</strong> Pompa freno con cilindro perpendicolare alla leva</li>
+    </ul>
+	<h3>Calcoli Effettuati</h3>
+	<ol>
+		<li><strong>Area del Cilindro Maestro:</strong> π * (diametro / 2)²</li>
+		<li><strong>Area del Pistone della Pinza:</strong> π * (diametro / 2)²</li>
+		<li><strong>Area Totale dei Pistoni della Pinza:</strong> Area del Pistone * Numero di Pistoni * Numero di Pinze</li>
+		<li><strong>Rapporto MC/Pinza:</strong> Area Totale dei Pistoni della Pinza / Area del Cilindro Maestro</li>
+		<li><strong>Rapporto Interasse (solo per pompe radiali):</strong> Pivot-to-Hand / Pivot-to-Piston</li>
+		<li><strong>Rapporto di Leva Complessivo:</strong>  Rapporto MC/Pinza * Rapporto Interasse</li>
+		<li><strong>Differenza di Potenza (%):</strong> ((Nuovo Rapporto MC/Pinza - Rapporto MC/Pinza Originale) / Rapporto MC/Pinza Originale) * 100</li>
+		<li><strong>Differenza di Corsa della Leva (%):</strong> ((Nuovo Rapporto di Leva Complessivo - Rapporto di Leva Complessivo Originale) / Rapporto di Leva Complessivo Originale) * 100</li>
+	</ol>
+
+	<h3>Note Metodologiche</h3>
+	<ul>
+		<li>Per i confronti il simulatore assume che la forza applicata alla leva del freno rimanga costante tra le diverse configurazioni.</li>
+		<li>Non vengono considerati fattori come l'elasticità del sistema frenante, la compressibilità del fluido o l'efficienza meccanica delle diverse configurazioni.</li>
+		<li>Per le pompe assiali, il rapporto interasse è fisso a 1:1, quindi il Pivot-to-Piston non influenza i calcoli e non è modificabile.</li>
+		<li>I risultati sono teorici e possono differire dalle prestazioni reali a causa di vari fattori non considerati nel modello.</li>
+	</ul>
+
+	<h3>Output del Simulatore e Interpretazione</h3>
+	<ol>
+		<li><strong>MC-to-Caliper Ratio (Rapporto MC/Pinza):</strong> Un valore più basso indica una maggiore modulabilità del freno, offrendo un controllo più preciso della forza frenante.</li>
+		<li><strong>Overall Leverage Ratio (Rapporto di Leva Complessivo):</strong> Un valore più alto indica una maggiore amplificazione totale della forza applicata alla leva, risultando in una maggiore potenza frenante potenziale.</li>
+		<li><strong>Power Difference (Differenza di Potenza %):</strong> Un valore negativo indica una riduzione dell'amplificazione idraulica, che generalmente si traduce in una maggiore modulabilità. Tuttavia, questo non tiene conto dell'effetto leva meccanica.</li>
+		<li><strong>Lever Travel Difference (Differenza di Corsa della Leva %):</strong> Un valore positivo indica che la leva deve essere tirata più a fondo per ottenere lo stesso spostamento del fluido. Questo può compensare o superare una riduzione della Power Difference, potenzialmente risultando in una maggiore potenza frenante complessiva.</li>
+	</ol>
+
+	<h3>Considerazioni sul Compromesso Ottimale</h3>
+	<ol>
+		<li><strong>Bilanciamento tra Modulabilità e Potenza:</strong> Cercare un equilibrio tra un MC-to-Caliper Ratio più basso (per maggiore modulabilità) e un Overall Leverage Ratio sufficientemente alto (per mantenere o aumentare la potenza frenante).</li>
+		<li><strong>Corsa della Leva:</strong> Un aumento moderato della corsa (20-30%) può migliorare la modulabilità, ma un aumento eccessivo può compromettere l'ergonomia e la reattività.</li>
+		<li><strong>Preferenze Individuali:</strong> La configurazione ideale varia in base alle preferenze del pilota e alle caratteristiche della moto.</li>
+	</ol>
+
+	<h3>Conclusione</h3>
+	<p>Il simulatore fornisce dati teorici utili per comprendere le dinamiche del sistema frenante. Tuttavia, l'esperienza pratica e le sensazioni del pilota rimangono fondamentali per la scelta finale della configurazione ottimale.</p>
+	<p>https://github.com/alexis-zorba/Cicci-s-Brake-Calculator</p>	
+	</div>
+
+	<div class="disclaimer">
+		<h3>Avvertenze</h3>
+		<p>Questo simulatore è un esercizio didattico e non sostituisce la consulenza di un professionista. Modificare il sistema frenante di una moto può compromettere la sicurezza se non eseguito correttamente. Consultare sempre un meccanico qualificato prima di apportare modifiche al sistema frenante.</p>
+	</div>
+
+	<div class="technical-info">
+		<p>The primary objective of Cicci's Brake Calculator is to provide motorcycle enthusiasts, mechanics, and engineers with a detailed and intuitive tool to compare and analyze various brake system configurations. This simulator is named in honor of Cicci, a legendary Honda mechanic from Genoa, known for his expertise and contributions to the motorcycle community.</p>
+		<h3>Glossary</h3>
+		<ul>
+			<li><strong>MC:</strong> Master Cylinder</li>
+			<li><strong>Bore:</strong> Internal diameter of the cylinder</li>
+			<li><strong>Pivot-to-Piston:</strong> Distance from the lever pivot to the point of contact with the master cylinder piston</li>
+			<li><strong>Pivot-to-Hand:</strong> Distance from the lever pivot to the point where hand force is applied</li>
+			<li><strong>Radial:</strong> Brake pump with cylinder parallel to the lever</li>
+			<li><strong>Axial:</strong> Brake pump with cylinder perpendicular to the lever</li>
+		</ul>
+		<h3>Calculated Values</h3>
+		<ol>
+			<li><strong>Master Cylinder Area:</strong> π * (diameter / 2)²</li>
+			<li><strong>Caliper Piston Area:</strong> π * (diameter / 2)²</li>
+			<li><strong>Total Caliper Piston Area:</strong> Piston Area * Number of Pistons * Number of Calipers</li>
+			<li><strong>MC-to-Caliper Ratio:</strong> Total Caliper Piston Area / Master Cylinder Area</li>
+			<li><strong>Interaxis Ratio (only for radial pumps):</strong> Pivot-to-Hand / Pivot-to-Piston</li>
+			<li><strong>Overall Leverage Ratio:</strong>For radial pumps: MC-to-Caliper Ratio * Interaxis Ratio</li>
+			<li><strong>Power Difference (%):</strong> ((New MC-to-Caliper Ratio - Original MC-to-Caliper Ratio) / Original MC-to-Caliper Ratio) * 100</li>
+			<li><strong>Lever Travel Difference (%):</strong> ((New Overall Leverage Ratio - Original Overall Leverage Ratio) / Original Overall Leverage Ratio) * 100</li>
+		</ol>
+
+		<h3>Methodological Notes</h3>
+		<ul>
+			<li>For comparisons, the simulator assumes that the force applied to the brake lever remains constant across different configurations.</li>
+			<li>Factors such as brake system elasticity, fluid compressibility, or mechanical efficiency of different configurations are not considered.</li>
+			<li>For axial pumps, the interaxis ratio is fixed at 1:1, so the Pivot-to-Piston does not influence calculations and is not modifiable.</li>
+			<li>The results are theoretical and may differ from actual performance due to various factors not considered in the model.</li>
+		</ul>
+
+		<h3>Simulator Output and Interpretation</h3>
+		<ol>
+			<li><strong>MC-to-Caliper Ratio:</strong> A lower value indicates greater brake modularity, offering more precise control of braking force.</li>
+			<li><strong>Overall Leverage Ratio:</strong> A higher value indicates greater total amplification of the force applied to the lever, resulting in potentially greater braking power.</li>
+			<li><strong>Power Difference (%):</strong> A negative value indicates a reduction in hydraulic amplification, generally translating to greater modularity. However, this does not account for the mechanical leverage effect.</li>
+			<li><strong>Lever Travel Difference (%):</strong> A positive value indicates that the lever needs to be pulled further to achieve the same fluid displacement. This can compensate for or exceed a reduction in Power Difference, potentially resulting in greater overall braking power.</li>
+		</ol>
+
+		<h3>Considerations for the Optimal Compromise</h3>
+		<ol>
+			<li><strong>Balance between Modularity and Power:</strong> Seek a balance between a lower MC-to-Caliper Ratio (for greater modularity) and a sufficiently high Overall Leverage Ratio (to maintain or increase braking power).</li>
+			<li><strong>Lever Travel:</strong> A moderate increase in lever travel (20-30%) can improve modularity, but excessive increase can compromise ergonomics and responsiveness.</li>
+			<li><strong>Individual Preferences:</strong> The ideal configuration varies based on the rider's preferences and the characteristics of the motorcycle.</li>
+		</ol>
+
+		<h3>Conclusion</h3>
+		<p>The simulator provides useful theoretical data for understanding brake system dynamics. However, practical experience and the rider's feel remain essential for the final choice of the optimal configuration.</p>
+		<p>https://github.com/alexis-zorba/Cicci-s-Brake-Calculator</p>
+	</div>
+
+<div class="disclaimer">
+    <h3>Warnings</h3>
+    <p>This simulator is an educational exercise and does not replace professional advice. Modifying a motorcycle's brake system can compromise safety if not done correctly. Always consult a qualified mechanic before making changes to the brake system.</p>
+</div>
+
+<script>
+    function checkMobile() {
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            document.getElementById('mobileWarning').style.display = 'block';
+            document.querySelector('.container').style.display = 'none';
+        }
+    }
+
+    window.onload = checkMobile;
+</script>	
+	
+</body>
+</html>
