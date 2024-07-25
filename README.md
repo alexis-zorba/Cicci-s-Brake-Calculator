@@ -19,9 +19,7 @@ Caliper Piston Area: π * (diameter / 2)²
 Total Caliper Piston Area: Piston Area * Number of Pistons * Number of Calipers
 MC-to-Caliper Ratio: Total Caliper Piston Area / Master Cylinder Area
 Interaxis Ratio (only for radial pumps): Pivot-to-Hand / Pivot-to-Piston
-Overall Leverage Ratio:
-For radial pumps: MC-to-Caliper Ratio * Interaxis Ratio
-For axial pumps: MC-to-Caliper Ratio (interaxis ratio is always 1:1)
+Overall Leverage Ratio: MC-to-Caliper Ratio * Interaxis Ratio
 Power Difference (%): ((New MC-to-Caliper Ratio - Original MC-to-Caliper Ratio) / Original MC-to-Caliper Ratio) * 100
 Lever Travel Difference (%): ((New Overall Leverage Ratio - Original Overall Leverage Ratio) / Original Overall Leverage Ratio) * 100
 
