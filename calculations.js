@@ -33,11 +33,11 @@ function calculateInteraxisRatio(pivotToHand, pivotToPiston) {
 
 function calculateZScore(mcToCaliperRatio, overallLeverageRatio, pistonArea, minPower, maxPower, powerWeight) {
     // Coefficienti delle rette per Ratio Min e Ratio Max
-    const m1 = (27 - 23) / (14000 - 2000);
-    const b1 = 23 - m1 * 2000;
+    const m1 = (22 - 10) / (14000 - 2000); // Coefficiente angolare per Ratio Min
+    const b1 = 10 - m1 * 2000; // Intercetta per Ratio Min
     
-    const m2 = (30 - 25) / (14000 - 2000);
-    const b2 = 27 - m2 * 2000;
+    const m2 = (28 - 12) / (14000 - 2000); // Coefficiente angolare per Ratio Max
+    const b2 = 12 - m2 * 2000; // Intercetta per Ratio Max
 
     // Calcolo del minModularity e maxModularity basati sull'area dei pistoni
     const minModularity = m1 * pistonArea + b1;
@@ -59,8 +59,9 @@ function calculateZScore(mcToCaliperRatio, overallLeverageRatio, pistonArea, min
     // Normalizzazione della potenza rispetto agli intervalli minPower e maxPower
     const normalizedPower = (overallLeverageRatio - minPower) / (maxPower - minPower);
     
-    // Calcolo finale dello Z-Score
-    return (normalizedModularity * (1 - Math.pow(powerWeight, 2)) + normalizedPower * Math.pow(powerWeight, 2));
+    // Calcolo finale dello Z-Score, variando il peso per oscillare nel range ottimale
+    const zScore = (normalizedModularity * (1 - Math.pow(powerWeight, 2)) + normalizedPower * Math.pow(powerWeight, 2));
+    return zScore;
 }
 
 function validateInputs(...inputs) {
