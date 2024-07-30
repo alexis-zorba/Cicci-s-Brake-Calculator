@@ -49,20 +49,21 @@ function calculateZScore(mcToCaliperRatio, overallLeverageRatio, pistonArea, min
     // Normalizzazione della modularità rispetto agli intervalli calcolati
     let normalizedModularity;
     if (mcToCaliperRatio < minModularity) {
-        normalizedModularity = (minModularity - mcToCaliperRatio) / minModularity;
+        normalizedModularity = Math.pow((minModularity - mcToCaliperRatio) / minModularity, 2);
     } else if (mcToCaliperRatio > maxModularity) {
-        normalizedModularity = (mcToCaliperRatio - maxModularity) / maxModularity;
+        normalizedModularity = Math.pow((mcToCaliperRatio - maxModularity) / maxModularity, 2);
     } else {
         normalizedModularity = 0; // All'interno dell'intervallo ottimale
     }
 
     // Normalizzazione della potenza rispetto agli intervalli minPower e maxPower
-    const normalizedPower = (overallLeverageRatio - minPower) / (maxPower - minPower);
+    const normalizedPower = Math.pow((overallLeverageRatio - minPower) / (maxPower - minPower), 2);
     
     // Calcolo finale dello Z-Score, variando il peso per oscillare nel range ottimale
     const zScore = (normalizedModularity * (1 - Math.pow(powerWeight, 2)) + normalizedPower * Math.pow(powerWeight, 2));
     return zScore;
 }
+
 
 
 function validateInputs(...inputs) {
