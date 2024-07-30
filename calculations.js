@@ -31,12 +31,36 @@ function calculateInteraxisRatio(pivotToHand, pivotToPiston) {
     return pivotToHand / pivotToPiston;
 }
 
-function calculateZScore(mcToCaliperRatio, overallLeverageRatio, minModularity, maxModularity, minPower, maxPower, powerWeight) {
-    const modularity = 1 / mcToCaliperRatio;
-    const normalizedModularity = (modularity - minModularity) / (maxModularity - minModularity);
-    const normalizedPower = (overallLeverageRatio - minPower) / (maxPower - minPower);
-	return (normalizedModularity * (1 - Math.pow(powerWeight, 2)) + normalizedPower * Math.pow(powerWeight, 2));
+function calculateZScore(mcToCaliperRatio, overallLeverageRatio, pistonArea, minPower, maxPower, powerWeight) {
+    // Coefficienti delle rette per Ratio Min e Ratio Max
+    const m1 = (27 - 23) / (14000 - 2000);
+    const b1 = 23 - m1 * 2000;
+    
+    const m2 = (30 - 25) / (14000 - 2000);
+    const b2 = 27 - m2 * 2000;
 
+    // Calcolo del minModularity e maxModularity basati sull'area dei pistoni
+    const minModularity = m1 * pistonArea + b1;
+    const maxModularity = m2 * pistonArea + b2;
+
+    // Calcolo della modularità come l'inverso del MC-to-Caliper Ratio
+    const modularity = 1 / mcToCaliperRatio;
+    
+    // Normalizzazione della modularità rispetto agli intervalli calcolati
+    let normalizedModularity;
+    if (mcToCaliperRatio < minModularity) {
+        normalizedModularity = (mcToCaliperRatio - minModularity) / minModularity;
+    } else if (mcToCaliperRatio > maxModularity) {
+        normalizedModularity = (mcToCaliperRatio - maxModularity) / maxModularity;
+    } else {
+        normalizedModularity = 0; // All'interno dell'intervallo ottimale
+    }
+
+    // Normalizzazione della potenza rispetto agli intervalli minPower e maxPower
+    const normalizedPower = (overallLeverageRatio - minPower) / (maxPower - minPower);
+    
+    // Calcolo finale dello Z-Score
+    return (normalizedModularity * (1 - Math.pow(powerWeight, 2)) + normalizedPower * Math.pow(powerWeight, 2));
 }
 
 function validateInputs(...inputs) {
