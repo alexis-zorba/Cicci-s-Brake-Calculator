@@ -122,7 +122,7 @@ function calculateResults() {
         if (Math.abs(leverTravelDifference) > maxLeverTravel) {
             zScore = "OUT";
         } else {
-            zScore = calculateZScore(mcToCaliperRatio, overallLeverageRatio, minModularity, maxModularity, minPower, maxPower, powerWeight);
+            zScore = calculateZScore(mcToCaliperRatio, overallLeverageRatio, pistonArea, minPower, maxPower, powerWeight);
         }
 
         powerDifferences.push(powerDifference);
