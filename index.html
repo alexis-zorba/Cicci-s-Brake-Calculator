@@ -171,6 +171,22 @@
         <li><strong>Lever Travel Difference (Differenza di Corsa della Leva %):</strong> Un valore positivo indica che la leva deve essere tirata più a fondo per ottenere lo stesso spostamento del fluido. Questo può compensare o superare una riduzione della Power Difference, potenzialmente risultando in una maggiore potenza frenante complessiva.</li>
     </ol>
 
+    <h3>Calcolo dello Z-Score</h3>
+    <p>
+        Lo Z-Score è una misura utilizzata per valutare e confrontare le diverse configurazioni del sistema frenante. L'obiettivo dello Z-Score è identificare le configurazioni che ottimizzano il bilanciamento tra modulabilità e potenza frenante, penalizzando fortemente quelle che si discostano dai parametri ottimali.
+    </p>
+    <h4>Introduzione Intuitiva</h4>
+    <p>
+        Immagina lo Z-Score come un punteggio che ti dice quanto bene una configurazione dei freni si comporta rispetto a un intervallo ottimale predefinito. Quando una configurazione si trova all'interno di questo intervallo ottimale, riceve un punteggio alto, indicandoti che è una buona scelta. Se invece la configurazione si trova fuori dall'intervallo, viene penalizzata, e il punteggio scende.
+    </p>
+    <h4>Spiegazione Graduale</h4>
+    <ol>
+        <li><strong>Determinazione dell'Intervallo Ottimale:</strong> Per una configurazione standard con pinze a 4 pistoni e 2 pinze da 34mm, l'intervallo ottimale del rapporto MC/Pinza è tra 22 e 28. Utilizziamo equazioni lineari basate sull'area totale dei pistoni per determinare gli intervalli ottimali per configurazioni diverse.</li>
+        <li><strong>Calcolo della Modularità:</strong> La modularità viene calcolata come l'inverso del rapporto MC/Pinza. Se il rapporto MC/Pinza è al di fuori dell'intervallo ottimale, applichiamo una penalizzazione quadratica per ridurre il punteggio. Se il rapporto MC/Pinza è all'interno dell'intervallo ottimale, la configurazione riceve un punteggio alto.</li>
+        <li><strong>Normalizzazione della Potenza:</strong> La potenza viene normalizzata rispetto agli intervalli minimi e massimi. Anche in questo caso, applichiamo una penalizzazione quadratica per valori fuori dall'intervallo ottimale.</li>
+        <li><strong>Combinazione delle Componenti:</strong> Combiniamo la modularità e la potenza normalizzate, pesando le due componenti in base al powerWeight. Il risultato finale è lo Z-Score, che premia le configurazioni bilanciate e penalizza fortemente quelle fuori dai parametri.</li>
+    </ol>
+
     <h3>Considerazioni sul Compromesso Ottimale</h3>
     <ol>
         <li><strong>Bilanciamento tra Modulabilità e Potenza:</strong> Cercare un equilibrio tra un MC-to-Caliper Ratio (per doppie pinze a 4 pistoncini consigliato un range tra i 23-27) e un Overall Leverage Ratio sufficientemente alto (tra 115:1 e 145:1) per mantenere o aumentare la potenza frenante.</li>
@@ -187,7 +203,6 @@
     <h3>Avvertenze</h3>
     <p>Questo simulatore è un esercizio didattico e non sostituisce la consulenza di un professionista. Modificare il sistema frenante di una moto può compromettere la sicurezza se non eseguito correttamente. Consultare sempre un meccanico qualificato prima di apportare modifiche al sistema frenante.</p>
 </div>
-
 <div class="technical-info">
     <p>The primary objective of Cicci's Brake Calculator is to provide motorcycle enthusiasts, mechanics, and engineers with a detailed and intuitive tool to compare and analyze various brake system configurations. This simulator is named in honor of Cicci, a legendary Honda mechanic from Genoa, known for his expertise and contributions to the motorcycle community.</p>
     <h3>Glossary</h3>
@@ -220,10 +235,26 @@
 
     <h3>Simulator Output and Interpretation</h3>
     <ol>
-        <li><strong>MC-to-Caliper Ratio:</strong> A lower value indicates greater brake modularity, offering more precise control of braking force.</li>
+        <li><strong>MC-to-Caliper Ratio:</strong> A lower value indicates that less lever travel is needed to achieve a given braking force, which can result in a "harder" and less modulatable feel. A higher value indicates that more lever travel is needed for the same braking force, offering greater modulation and control.</li>
         <li><strong>Overall Leverage Ratio:</strong> A higher value indicates greater total amplification of the force applied to the lever, resulting in potentially greater braking power.</li>
         <li><strong>Power Difference (%):</strong> A negative value indicates a reduction in hydraulic amplification, generally translating to greater modularity. However, this does not account for the mechanical leverage effect.</li>
         <li><strong>Lever Travel Difference (%):</strong> A positive value indicates that the lever needs to be pulled further to achieve the same fluid displacement. This can compensate for or exceed a reduction in Power Difference, potentially resulting in greater overall braking power.</li>
+    </ol>
+
+    <h3>Z-Score Calculation</h3>
+    <p>
+        The Z-Score is a measure used to evaluate and compare different brake system configurations. The goal of the Z-Score is to identify configurations that optimize the balance between modularity and braking power, strongly penalizing those that deviate from the optimal parameters.
+    </p>
+    <h4>Intuitive Introduction</h4>
+    <p>
+        Think of the Z-Score as a score that tells you how well a brake configuration performs relative to a predefined optimal range. When a configuration falls within this optimal range, it receives a high score, indicating that it is a good choice. If the configuration is outside the range, it is penalized, and the score decreases.
+    </p>
+    <h4>Gradual Explanation</h4>
+    <ol>
+        <li><strong>Determining the Optimal Range:</strong> For a standard configuration with 4-piston calipers and 2 calipers with 34mm pistons, the optimal MC-to-Caliper Ratio range is between 22 and 28. We use linear equations based on the total piston area to determine the optimal ranges for different configurations.</li>
+        <li><strong>Calculating Modularity:</strong> Modularity is calculated as the inverse of the MC-to-Caliper Ratio. If the MC-to-Caliper Ratio is outside the optimal range, a quadratic penalty is applied to reduce the score. If the MC-to-Caliper Ratio is within the optimal range, the configuration receives a high score.</li>
+        <li><strong>Normalizing Power:</strong> Power is normalized relative to the minimum and maximum ranges. A quadratic penalty is also applied for values outside the optimal range.</li>
+        <li><strong>Combining the Components:</strong> We combine the normalized modularity and power components, weighting the two based on powerWeight. The final result is the Z-Score, which rewards balanced configurations and strongly penalizes those outside the parameters.</li>
     </ol>
 
     <h3>Considerations for the Optimal Compromise</h3>
@@ -242,6 +273,8 @@
     <h3>Warnings</h3>
     <p>This simulator is an educational exercise and does not replace professional advice. Modifying a motorcycle's brake system can compromise safety if not done correctly. Always consult a qualified mechanic before making changes to the brake system.</p>
 </div>
+
+
 
 
 <script>
