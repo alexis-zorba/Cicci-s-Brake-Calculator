@@ -87,9 +87,9 @@ console.log(`Z-Score: ${zScore}`);
 
 
 
-function validateInputs(...inputs) {
-    return inputs.every(input => input > 0);
-}
+//function validateInputs(...inputs) {
+//    return inputs.every(input => input > 0);
+//}
 
 // Export the functions if using modules
 // Uncomment the following line if you're using ES6 modules
