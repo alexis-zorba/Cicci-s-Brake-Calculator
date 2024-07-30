@@ -42,3 +42,4 @@ Considerations for the Optimal Compromise
 Balance between Modularity and Power: Seek a balance between a lower MC-to-Caliper Ratio and a sufficiently high Overall Leverage Ratio
 Lever Travel: A moderate increase in lever travel (20-30%) can improve modularity, but excessive increase can compromise ergonomics and responsiveness.
 Individual Preferences: The ideal configuration varies based on the rider's preferences and the characteristics of the motorcycle.
+The preset example is for calculating the brake conversion of a Ducati Sportclassic Sport 1000, with 4-piston calipers (30 and 32mm), to switch to a radial pump and Brembo Triple Bridge caliper (34mm).
