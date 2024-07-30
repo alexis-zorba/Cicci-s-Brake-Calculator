@@ -11,7 +11,7 @@ function createConfigurationRows() {
             <td>${config.type}</td>
             <td><input type="number" class="pivotToPiston" value="${config.pivotToPiston}" step="0.1"></td>
             <td><input type="number" class="pivotToHand" value="${config.pivotToHand}" step="0.1"></td>
-            <td><input type="number" class="pistonDiameter" value="32" step="0.1"></td>
+            <td><input type="number" class="pistonDiameter" value="34" step="0.1"></td>
             <td><input type="number" class="pistonsPerCaliper" value="4"></td>
             <td><input type="number" class="numberOfCalipers" value="2"></td>
         `;
