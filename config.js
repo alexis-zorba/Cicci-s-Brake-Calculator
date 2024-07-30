@@ -36,16 +36,6 @@ const presetConfigurations = [
     { name: "19x17 radial", bore: 19, type: "radial", pivotToPiston: 17, pivotToHand: 90 },
     { name: "19x18 radial", bore: 19, type: "radial", pivotToPiston: 18, pivotToHand: 90 },
     { name: "19x20 radial", bore: 19, type: "radial", pivotToPiston: 20, pivotToHand: 90 },
-    { name: "10 axial", bore: 10, type: "axial", pivotToPiston: 30, pivotToHand: 90 },
-    { name: "12.7 axial", bore: 12.7, type: "axial", pivotToPiston: 27, pivotToHand: 90 },
-    { name: "14 axial", bore: 14, type: "axial", pivotToPiston: 25, pivotToHand: 90 },
-    { name: "16 axial", bore: 16, type: "axial", pivotToPiston: 18, pivotToHand: 90 },
-    { name: "17 axial", bore: 17, type: "axial", pivotToPiston: 16, pivotToHand: 90 },
-    { name: "18 axial", bore: 18, type: "axial", pivotToPiston: 18, pivotToHand: 90 },
-    { name: "18 axial", bore: 18, type: "axial", pivotToPiston: 16, pivotToHand: 90 },
-    { name: "18 axial", bore: 18, type: "axial", pivotToPiston: 13, pivotToHand: 90 },
-    { name: "19 axial", bore: 19, type: "axial", pivotToPiston: 13, pivotToHand: 90 },
-    { name: "19 axial", bore: 19, type: "axial", pivotToPiston: 10, pivotToHand: 90 }
 ];
 
 
