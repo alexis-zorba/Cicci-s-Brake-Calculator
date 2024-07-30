@@ -1,7 +1,5 @@
 // calculations.js
 
-// calculations.js
-
 const pi = Math.PI;
 
 function calculateArea(diameter) {
@@ -12,7 +10,7 @@ function calculateRatio(mcArea, totalPistonArea) {
     return totalPistonArea / mcArea;
 }
 
-function calculateOverallLeverage(mcToCaliperRatio, interaxisRatio, pumpType) {
+function calculateOverallLeverage(mcToCaliperRatio, interaxisRatio) {
     return mcToCaliperRatio * interaxisRatio;
 }
 
@@ -31,13 +29,32 @@ function calculateInteraxisRatio(pivotToHand, pivotToPiston) {
     return pivotToHand / pivotToPiston;
 }
 
-function calculateZScore(mcToCaliperRatio, overallLeverageRatio, minModularity, maxModularity, minPower, maxPower, powerWeight) {
-    const modularity = 1 / mcToCaliperRatio;
-    const normalizedModularity = (modularity - minModularity) / (maxModularity - minModularity);
-    const normalizedPower = (overallLeverageRatio - minPower) / (maxPower - minPower);
-	return (normalizedModularity * (1 - Math.pow(powerWeight, 2)) + normalizedPower * Math.pow(powerWeight, 2));
-
+function calculateOptimalRange(referenceDiameter, referenceNumPistons, referenceNumCalipers, referenceRatioMin, referenceRatioMax, currentDiameter, currentNumPistons, currentNumCalipers) {
+    const referenceArea = calculateArea(referenceDiameter) * referenceNumPistons * referenceNumCalipers;
+    const currentArea = calculateArea(currentDiameter) * currentNumPistons * currentNumCalipers;
+    const scaleFactor = currentArea / referenceArea;
+    return [referenceRatioMin * scaleFactor, referenceRatioMax * scaleFactor];
 }
+
+function calculateZScore(mcToCaliperRatio, overallLeverageRatio, optimalRatioRange, minPower, maxPower, powerWeight) {
+    const [optimalMin, optimalMax] = optimalRatioRange;
+
+    let modularityScore;
+    if (mcToCaliperRatio < optimalMin) {
+        modularityScore = (mcToCaliperRatio - optimalMin) / optimalMin;
+    } else if (mcToCaliperRatio > optimalMax) {
+        modularityScore = (mcToCaliperRatio - optimalMax) / optimalMax;
+    } else {
+        modularityScore = 0; // All'interno dell'intervallo ottimale
+    }
+
+    // Normalizzazione della potenza
+    const normalizedPower = (overallLeverageRatio - minPower) / (maxPower - minPower);
+
+    // Calcolo finale dello Z-Score
+    return (modularityScore * (1 - Math.pow(powerWeight, 2)) + normalizedPower * Math.pow(powerWeight, 2));
+}
+
 
 function validateInputs(...inputs) {
     return inputs.every(input => input > 0);
