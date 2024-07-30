@@ -58,12 +58,12 @@ const presetConfigurations = [
 }; */
 
 const defaultOriginalSetup = {
-    bore: 16,
+    bore: 18,
     numberOfCalipers: 2,
     pivotToPiston: 18,
     pistonsPerCaliper: 4,
     pivotToHand: 90,
-    pistonDiameter: 32,
+    pistonDiameter: 34,
     pumpType: "axial"
 };
 
@@ -72,13 +72,13 @@ const defaultOriginalSetup = {
 const powerModularitySlider = {
     min: 0,
     max: 100,
-    defaultValue: 50,
+    defaultValue: 0,
     step: 1
 };
 
 // Configuration for the max lever travel increase
 const maxLeverTravel = {
-    defaultValue: 25,
+    defaultValue: 40,
     min: 0,
     max: 100,
     step: 1
