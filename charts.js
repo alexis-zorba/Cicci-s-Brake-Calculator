@@ -91,13 +91,13 @@ function createScatterChart(mcToCaliperRatios, leverageRatios, originalMcToCalip
                 x: {
                     title: {
                         display: true,
-                        text: 'MC-to-Caliper Ratio - più basso = più modulare'
+                        text: 'MC-to-Caliper Ratio - Amplificazione idraulica'
                     }
                 },
                 y: {
                     title: {
                         display: true,
-                        text: 'Leverage Ratio - più alto = più potente'
+                        text: 'Leverage Ratio - Amplificazione totale'
                     }
                 }
             },
